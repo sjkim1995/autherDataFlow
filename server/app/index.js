@@ -26,6 +26,14 @@ app.post('/login', function (req, res, next) {
   .catch(next);
 });
 
+app.get("/logout", function(req, res, next){
+  console.log("route hit")
+  console.log(req.session);
+  req.session.destroy()
+  console.log(req.session);
+  res.send("logged out!")
+})
+
 // place right after the session setup middleware
 app.use(function (req, res, next) {
   console.log('session', req.session);
