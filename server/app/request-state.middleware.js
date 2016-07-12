@@ -14,4 +14,10 @@ router.use(function (req, res, next) {
   });
 });
 
+router.post("/login", function (req, res, next) {
+	console.log("made it")
+})
+
 module.exports = router;
+
+

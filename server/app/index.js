@@ -3,13 +3,28 @@
 var app = require('express')();
 var path = require('path');
 
+
 app.use(require('./logging.middleware'));
 
 app.use(require('./request-state.middleware'));
 
+app.use(require('./session.middleware'));
+
+// place right after the session setup middleware
+app.use(function (req, res, next) {
+  console.log('session', req.session);
+  next();
+});
+
 app.use(require('./statics.middleware'));
 
 app.use('/api', require('../api/api.router'));
+
+app.use('/api', function (req, res, next) {
+  if (!req.session.counter) req.session.counter = 0;
+  console.log('counter', ++req.session.counter);
+  next();
+});
 
 var validFrontendRoutes = ['/', '/stories', '/users', '/stories/:id', '/users/:id', '/signup', '/login'];
 var indexPath = path.join(__dirname, '..', '..', 'public', 'index.html');

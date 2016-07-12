@@ -16,7 +16,7 @@ app.factory('User', function ($http, Story) {
   };
 
   User.prototype.fetch = function () {
-    return $http.get(this.getUrl())
+    return $http.get(this.getUrl()) 
     .then(function (res) {
       var user = new User(res.data);
       user.stories = user.stories.map(function (obj) {
