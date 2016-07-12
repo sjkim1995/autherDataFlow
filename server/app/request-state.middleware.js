@@ -1,4 +1,4 @@
-'use strict'; 
+'use strict';
 
 var router = require('express').Router();
 
@@ -14,9 +14,9 @@ router.use(function (req, res, next) {
   });
 });
 
-router.post("/login", function (req, res, next) {
-	console.log("made it")
-})
+// router.post("/login", function (req, res, next) {
+//   var ema
+// })
 
 module.exports = router;
 

@@ -1,14 +1,30 @@
-'use strict'; 
+'use strict';
 
 var app = require('express')();
 var path = require('path');
-
+var User = require('../api/users/user.model.js');
 
 app.use(require('./logging.middleware'));
 
 app.use(require('./request-state.middleware'));
 
 app.use(require('./session.middleware'));
+
+app.post('/login', function (req, res, next) {
+  User.findOne({
+    where: req.body
+  })
+  .then(function (user) {
+    console.log('*********', req.body.email, req.body.password);
+    if (!user) {
+      res.sendStatus(401);
+    } else {
+      req.session.userId = user.id;
+      res.sendStatus(204);
+    }
+  })
+  .catch(next);
+});
 
 // place right after the session setup middleware
 app.use(function (req, res, next) {
