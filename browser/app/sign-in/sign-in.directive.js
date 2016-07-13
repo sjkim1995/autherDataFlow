@@ -3,7 +3,7 @@
 app.directive('signIn', function ($http, $log, Auth, $state) {
   return {
     restrict: 'E',
-    templateUrl: '/browser/app/signin/sing-in.html',
+    templateUrl: '/browser/app/sign-in/sign-in.html',
     scope: {
       usermethod: "="
     },
