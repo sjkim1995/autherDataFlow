@@ -13,7 +13,7 @@
       </li>
       <li>
         <span
-          contenteditable
+          contenteditable 
           ng-model="searchStory.author.name"
           placeholder="Jean Doe">
         </span>
@@ -63,7 +63,7 @@
           <a ui-sref="user({id: story.author_id})">{{ story.author.name }}</a>
         </li>
       </ul>
-      <button class="btn btn-default btn-xs" ng-click="removeStory(story)">
+      <button class="btn btn-default btn-xs" ng-click="removeStory(story)" ng-show = "editable()">
         <span class="glyphicon glyphicon-remove"></span>
       </button>
     </li>

@@ -1,11 +1,16 @@
 app.factory("Auth", function ($http) {
 	var AuthMethods = {
-		currentUser: null
+		currentUser: null,
+		admin: null
 	};
 
 	AuthMethods.set = function (user) {
 		AuthMethods.currentUser = user.email;
 	};
+
+	AuthMethods.isAdmin = function() {
+		return AuthMethods.admin;
+	}
 
 	AuthMethods.get = function () {
 		return AuthMethods.currentUser;
@@ -19,6 +24,10 @@ app.factory("Auth", function ($http) {
 				console.log(response);
 				return response.data;
 			})
+			.then(function(userData){
+				AuthMethods.admin = userData.isAdmin;
+				return userData;
+			})
 	}
 
 	AuthMethods.signup = function(userInfo) {
@@ -27,6 +36,9 @@ app.factory("Auth", function ($http) {
 		return $http.post("/api/users", userInfo)
 			.then(function(response){
 				return response.data
+			})
+			.then(function(userData){
+				AuthMethods.admin = userData.isAdmin;
 			})
 	}
 

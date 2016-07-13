@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('UserListCtrl', function ($scope, users, User) {
+app.controller('UserListCtrl', function ($scope, users, User, Auth) {
   $scope.users = users;
   $scope.addUser = function () {
     $scope.userAdd.save()
@@ -9,7 +9,10 @@ app.controller('UserListCtrl', function ($scope, users, User) {
       $scope.users.unshift(user);
     });
   };
-  
+
+  $scope.editable = function() {
+    return Auth.isAdmin();
+  }
   $scope.userSearch = new User();
 
   $scope.userAdd = new User();

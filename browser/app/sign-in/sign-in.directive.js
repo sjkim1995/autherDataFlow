@@ -19,7 +19,8 @@ app.directive('signIn', function ($http, $log, Auth, $state) {
 
         fnToCall(userInfo)
         .then(function(response){
-          $state.go("stories")
+          console.log("hi", response)
+          $state.go("user", {id: response.id});
         })
         .catch($log.error);
       }
