@@ -8,8 +8,8 @@ app.directive('signIn', function ($http, $log, Auth, $state) {
       usermethod: "="
     },
     link: function (scope, element, attrs) {
-
-      var fnToCall = usermethod === 'login' ? Auth.login : Auth.signup;
+      scope.usermethod = attrs.usermethod;
+      var fnToCall = attrs.usermethod === 'login' ? Auth.login : Auth.signup;
 
       scope.signupSubmit = function () {
         var userInfo = {
@@ -20,7 +20,6 @@ app.directive('signIn', function ($http, $log, Auth, $state) {
         fnToCall(userInfo)
         .then(function(response){
           $state.go("stories")
-          console.log("signup successful!")
         })
         .catch($log.error);
       }
